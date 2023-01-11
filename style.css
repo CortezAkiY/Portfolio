@@ -1,10 +1,11 @@
 html, body {
   height: 100%;
   width: 100%;
+  background-color:#EBFFD3;
 }
 #back{
-  height: 400px;
-  width: 500px;
+  height: 100%;
+  width: 100%;
   background-color:#EBFFD3;
   
 }
@@ -20,8 +21,6 @@ html, body {
   
 }
 #pro{
-  position:relative;
-  left:150px;
   color:white;
   background-color:orange;
   font-size:35px;
