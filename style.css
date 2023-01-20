@@ -14,7 +14,7 @@ html, body {
   color:white;
   background-color:orange;
   font-size:50px; 
-  display: flex;
+  display: inline-block;
   align-items: center;
   border-radius:50%;
   padding:5px 5px 5px 5px;
@@ -23,12 +23,12 @@ html, body {
 #pro{
   color:white;
   background-color:orange;
-  font-size:35px;
-  display: flex;
-  align-items: center;
-  width:195px;
+  font-size:33px;
+  text-align:center;
+  display:inline-block;
   border-radius:50%;
-  padding:5px 5px 5px 5px;
+  padding:12px 5px 5px 5px;
+  
 
   
 }
@@ -95,3 +95,19 @@ h2{
   border-color: #cbe585;
   color: #FFF;
 }
+pre{
+  display:inline-block;
+  background-color:white;
+}
+.pc{
+  display:inline-block;
+  font-size:20px;
+  padding:3px 3px 3px 3px;
+  text-shadow:white 2px 2px;
+  background-color:lightblue;
+  border-bottom:2px solid gray;
+  border-right:2px solid gray;
+}
+
+
+

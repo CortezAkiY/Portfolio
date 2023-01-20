@@ -14,12 +14,161 @@
 
 <p>When I get to this school, I started learning proggrammimg with Arduino.
  After a while, I started learing python by my self and be taught by a teacher. 
- Then, I started learing web developing languages during Computer Skills classes</p>
+ Then, I started learing web developing languages during Computer Skills classes.</p>
+
+<div class="pc">Here are my previous codes.</div>
+  
+<details>
+<summary>Click here to see Aruduino code of my Robot Contest.</summary>
+<pre><code>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">PS3BT</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><font color="#000000">usbhub</font><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<font color="#5e6d03">#ifdef</font> <font color="#000000">dobogusinclude</font>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><font color="#000000">spi4teensy3</font><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<font color="#5e6d03">#endif</font>
+<font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">SPI</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>
+<b><font color="#d35400">USB</font></b> <font color="#000000">Usb</font><font color="#000000">;</font>
+<b><font color="#d35400">BTD</font></b> <font color="#000000">Btd</font><font color="#000000">(</font><font color="#434f54">&amp;</font><font color="#000000">Usb</font><font color="#000000">)</font><font color="#000000">;</font>
+<b><font color="#d35400">PS3BT</font></b> <font color="#000000">PS3</font><font color="#000000">(</font><font color="#434f54">&amp;</font><font color="#000000">Btd</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<font color="#00979c">bool</font> <font color="#000000">printTemperature</font><font color="#434f54">,</font> <font color="#000000">printAngle</font><font color="#000000">;</font>
+<font color="#00979c">int</font> <font color="#000000">D1</font> <font color="#434f54">=</font> <font color="#000000">6</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Direction(omni1)</font>
+<font color="#00979c">int</font> <font color="#000000">PWM1</font> <font color="#434f54">=</font> <font color="#000000">5</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Speed(omni1)</font>
+
+<font color="#00979c">int</font> <font color="#000000">D2</font> <font color="#434f54">=</font> <font color="#000000">8</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Direction(omni2)</font>
+<font color="#00979c">int</font> <font color="#000000">PWM2</font> <font color="#434f54">=</font> <font color="#000000">7</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Speed(omni2)</font>
+
+<font color="#00979c">int</font> <font color="#000000">D3</font> <font color="#434f54">=</font> <font color="#000000">12</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Direction(omni3)</font>
+<font color="#00979c">int</font> <font color="#000000">PWM3</font> <font color="#434f54">=</font> <font color="#000000">11</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Speed(omin3)</font>
+
+<font color="#00979c">int</font> <font color="#000000">triger1A</font> <font color="#434f54">=</font> <font color="#000000">34</font><font color="#000000">;</font> &nbsp;<font color="#434f54">&#47;&#47;Release</font>
+<font color="#00979c">int</font> <font color="#000000">triger1B</font> <font color="#434f54">=</font> <font color="#000000">35</font><font color="#000000">;</font> &nbsp;<font color="#434f54">&#47;&#47;Reload</font>
+<font color="#00979c">int</font> <font color="#000000">pwm1ab</font> &nbsp;&nbsp;<font color="#434f54">=</font> <font color="#000000">3</font><font color="#000000">;</font> &nbsp;&nbsp;
+
+<font color="#00979c">int</font> <font color="#000000">triger2A</font> <font color="#434f54">=</font> <font color="#000000">46</font><font color="#000000">;</font> &nbsp;<font color="#434f54">&#47;&#47;Release</font>
+<font color="#00979c">int</font> <font color="#000000">triger2B</font> <font color="#434f54">=</font> <font color="#000000">47</font><font color="#000000">;</font> &nbsp;<font color="#434f54">&#47;&#47;Reload</font>
+<font color="#00979c">int</font> <font color="#000000">pwm2ab</font> &nbsp;&nbsp;<font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
+
+<font color="#00979c">int</font> <font color="#000000">rr</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Rotate</font>
+<font color="#00979c">int</font> <font color="#000000">xaxis</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Hrizontal movement</font>
+<font color="#00979c">int</font> <font color="#000000">yaxis</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Vertical movement</font>
+
+<font color="#00979c">double</font> <font color="#000000">pi</font> <font color="#434f54">=</font> <font color="#000000">3.1415926535</font><font color="#000000">;</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">D1</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">D2</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">D3</font><font color="#434f54">,</font> <font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">triger1A</font><font color="#434f54">,</font><font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">triger1B</font><font color="#434f54">,</font><font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">triger2A</font><font color="#434f54">,</font><font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">triger2B</font><font color="#434f54">,</font><font color="#00979c">OUTPUT</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">115200</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#5e6d03">#if</font> <font color="#434f54">!</font><font color="#000000">defined</font><font color="#000000">(</font><font color="#000000">__MIPSEL__</font><font color="#000000">)</font>
+ &nbsp;<font color="#5e6d03">while</font> <font color="#000000">(</font><font color="#434f54">!</font><b><font color="#d35400">Serial</font></b><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#5e6d03">#endif</font>
+ &nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">Usb</font><font color="#434f54">.</font><font color="#000000">Init</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">==</font> <font color="#434f54">-</font><font color="#000000">1</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#000000">F</font><font color="#000000">(</font><font color="#005c5f">&#34;\r\nOSC did not start&#34;</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">while</font> <font color="#000000">(</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#000000">}</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#000000">F</font><font color="#000000">(</font><font color="#005c5f">&#34;\r\nPS3 Bluetooth Library Started&#34;</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<font color="#000000">Usb</font><font color="#434f54">.</font><font color="#d35400">Task</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
 
 
 
+ &nbsp;&nbsp;&nbsp;<font color="#000000">rr</font> <font color="#434f54">=</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getAnalogButton</font><font color="#000000">(</font><font color="#00979c">R2</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getAnalogButton</font><font color="#000000">(</font><font color="#00979c">L2</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#434f54">&#47;</font> <font color="#000000">2</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;Control with analog button</font>
+
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getAnalogHat</font><font color="#000000">(</font><font color="#00979c">LeftHatX</font><font color="#000000">)</font> <font color="#434f54">&lt;</font> <font color="#000000">5</font> <font color="#434f54">&amp;&amp;</font> <font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getAnalogHat</font><font color="#000000">(</font><font color="#00979c">LeftHatY</font><font color="#000000">)</font> <font color="#434f54">&lt;</font> <font color="#000000">5</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">xaxis</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">yaxis</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">xaxis</font> <font color="#434f54">=</font> <font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getAnalogHat</font><font color="#000000">(</font><font color="#00979c">LeftHatX</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">127.5</font><font color="#000000">;</font> &nbsp;<font color="#434f54">&#47;&#47;Control with joystic</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">yaxis</font> <font color="#434f54">=</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getAnalogHat</font><font color="#000000">(</font><font color="#00979c">LeftHatY</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">127.5</font><font color="#000000">)</font> <font color="#434f54">*</font> <font color="#000000">(</font><font color="#434f54">-</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+
+
+ &nbsp;&nbsp;&nbsp;
+
+<font color="#00979c">double</font> <font color="#000000">V1</font> <font color="#434f54">=</font> <font color="#000000">xaxis</font> <font color="#434f54">+</font> <font color="#000000">rr</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;omni1 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font>
+<font color="#00979c">double</font> <font color="#000000">V2</font> <font color="#434f54">=</font> <font color="#000000">xaxis</font><font color="#434f54">*</font><font color="#000000">(</font> <font color="#434f54">-</font><font color="#d35400">cos</font><font color="#000000">(</font><font color="#000000">pi</font> <font color="#434f54">&#47;</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#434f54">+</font> <font color="#000000">yaxis</font><font color="#434f54">*</font><font color="#000000">(</font><font color="#d35400">sin</font><font color="#000000">(</font><font color="#000000">pi</font> <font color="#434f54">&#47;</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#434f54">+</font> <font color="#000000">rr</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;omni2</font>
+<font color="#00979c">double</font> <font color="#000000">V3</font> <font color="#434f54">=</font> <font color="#000000">xaxis</font><font color="#434f54">*</font><font color="#000000">(</font><font color="#434f54">-</font><font color="#d35400">cos</font><font color="#000000">(</font><font color="#000000">pi</font> <font color="#434f54">&#47;</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#434f54">+</font> <font color="#000000">yaxis</font> <font color="#434f54">*</font><font color="#000000">(</font><font color="#434f54">-</font> <font color="#d35400">sin</font><font color="#000000">(</font><font color="#000000">pi</font> <font color="#434f54">&#47;</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">)</font> <font color="#434f54">+</font> <font color="#000000">rr</font><font color="#000000">;</font> &nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47;omni3</font>
+
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">V1</font> <font color="#434f54">&gt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">D1</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">V1</font> <font color="#434f54">&lt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">D1</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">V1</font> <font color="#434f54">=</font> <font color="#000000">V1</font> <font color="#434f54">*</font> <font color="#000000">(</font><font color="#434f54">-</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">PWM1</font><font color="#434f54">,</font> <font color="#000000">V1</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">V2</font> <font color="#434f54">&gt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">D2</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">V2</font> <font color="#434f54">&lt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">D2</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">V2</font> <font color="#434f54">=</font> <font color="#000000">V2</font> <font color="#434f54">*</font> <font color="#000000">(</font><font color="#434f54">-</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">PWM2</font><font color="#434f54">,</font> <font color="#000000">V2</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ &nbsp;&nbsp;&nbsp;<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">V3</font> <font color="#434f54">&gt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">D3</font><font color="#434f54">,</font> <font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">V3</font> <font color="#434f54">&lt;</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">D3</font><font color="#434f54">,</font> <font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#000000">V3</font> <font color="#434f54">=</font> <font color="#000000">V3</font> <font color="#434f54">*</font> <font color="#000000">(</font><font color="#434f54">-</font><font color="#000000">1</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;&nbsp;&nbsp;<font color="#000000">}</font>
+ &nbsp;&nbsp;&nbsp;<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">PWM3</font><font color="#434f54">,</font> <font color="#000000">V3</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getButtonClick</font><font color="#000000">(</font><font color="#00979c">CIRCLE</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">{</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger1A</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger1B</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;CIRCLE&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">300</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger1A</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Stop&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ <font color="#000000">}</font>
+<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwm1ab</font><font color="#434f54">,</font><font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getButtonClick</font><font color="#000000">(</font><font color="#00979c">SQUARE</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">{</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger2A</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger2B</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;SQUARE&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">300</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger2A</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Stop&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ <font color="#000000">}</font>
+<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwm2ab</font><font color="#434f54">,</font><font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getButtonClick</font><font color="#000000">(</font><font color="#00979c">TRIANGLE</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">{</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger1A</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger1B</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;TRIANGLE&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">300</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger1A</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Stop&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ <font color="#000000">}</font>
+<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwm1ab</font><font color="#434f54">,</font><font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+
+ <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">PS3</font><font color="#434f54">.</font><font color="#d35400">getButtonClick</font><font color="#000000">(</font><font color="#00979c">CROSS</font><font color="#000000">)</font><font color="#000000">)</font><font color="#000000">{</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger2A</font><font color="#434f54">,</font><font color="#00979c">HIGH</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger2B</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">print</font><font color="#000000">(</font><font color="#005c5f">&#34;SQUARE&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">300</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<font color="#d35400">digitalWrite</font><font color="#000000">(</font><font color="#000000">triger2A</font><font color="#434f54">,</font><font color="#00979c">LOW</font><font color="#000000">)</font><font color="#000000">;</font>
+ &nbsp;<b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">println</font><font color="#000000">(</font><font color="#005c5f">&#34;Stop&#34;</font><font color="#000000">)</font><font color="#000000">;</font>
+ <font color="#000000">}</font>
+<font color="#d35400">analogWrite</font><font color="#000000">(</font><font color="#000000">pwm2ab</font><font color="#434f54">,</font><font color="#000000">255</font><font color="#000000">)</font><font color="#000000">;</font>
+
+<font color="#000000">}</font>
+
+</code></pre>
+</details>
   <div><a href="index.html" class="bbb">▼BACK</a></div>
-</div>
+  
 </div>
 </body>
 
